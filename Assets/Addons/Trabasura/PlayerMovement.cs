@@ -74,7 +74,7 @@ public class PlayerMovement : MonoBehaviour
         if(isGrounded)
         {       
             footStepCheck += inputVelocity.magnitude;
-            if(footStepCheck > footStepDistance)
+            if(footStepCheck > footStepDistance && footsteps.Count > 0)
             {
                 footStepCheck = 0;
                 GetComponent<AudioSource>().clip = footsteps[Random.Range(0, footsteps.Count)];

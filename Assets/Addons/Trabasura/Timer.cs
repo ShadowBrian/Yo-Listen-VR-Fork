@@ -23,6 +23,10 @@ public class Timer
         }
     }
 
+    public float GetTimeRemaining(){
+        return endTime-Time.time;
+    }
+
     public void ActivateTimer()
     {
         startTime = Time.time;
