@@ -46,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 movementInput
     {
         get{
-            if(GameManager.uiOpened) return Vector3.zero;
+            // if(GameManager.uiOpened) return Vector3.zero;
             return new Vector3(Input.GetAxis("Horizontal"), 0 ,Input.GetAxis("Vertical"));
         }
     }
@@ -106,7 +106,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if(moveable && controller.enabled)controller.Move((velocity + jumpDirection) * Time.deltaTime);
 
-        if(Input.GetButton("Jump") && isGrounded && moveable && canJump && !GameManager.uiOpened)
+        if(Input.GetButton("Jump") && isGrounded && moveable && canJump)// && !GameManager.uiOpened)
         {
             if(velocity.y <= 0)
             {
