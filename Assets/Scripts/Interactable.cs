@@ -1,8 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public abstract class Interactable : MonoBehaviour
+using UnityEngine.Events;
+public class Interactable : MonoBehaviour
 {
-    public abstract void OnInteract();
+
+    public UnityEvent mEvent;
+    public bool interactable = true;
+    public virtual void OnInteract()
+    {
+        mEvent.Invoke();
+    }
+
+    public virtual bool CheckIfInteractable(){
+        return interactable;
+    }
 }

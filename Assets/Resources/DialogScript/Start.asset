@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6dee9a0eacedf04abeb6e1df6d7e874, type: 3}
+  m_Name: Start
+  m_EditorClassIdentifier: 
+  textToRead:
+  - Yo, listen!
+  - Kid, kid I'm talking to you.
+  - Yeah you with the blank face and the dumb outfit.
+  - My name is Ivan!
+  - I don't know where I am. I can tell from the smell of this place
+  - that YOU must've moved my home.
+  - Didn't your mother ever tell you to not, pick up random pots
+  - and take them with you?
+  - Whatever, just let me out of here so I can move my house back to
+  - where it is supposed to be!
+  next: {fileID: 11400000, guid: d438db0e8086b4d4dac8609e1a43b2e4, type: 2}

@@ -36,6 +36,7 @@ public class MouseLook : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(GameManager.instance.resetting) return;
         //if(GameManager.uiOpened) return;
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime/lastTimeScale;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime/lastTimeScale;

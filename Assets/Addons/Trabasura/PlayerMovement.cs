@@ -26,12 +26,13 @@ public class PlayerMovement : MonoBehaviour
     public float footStepDistance = 0;
     float footStepCheck =0;
     Transform ground;
+    public bool parentToGround  = true;
     public bool isGrounded{
         get{
             var cols = Physics.OverlapSphere(groundPoint.position, groundDistance, groundMask);
             foreach(var col in cols)
             {
-                if(col.transform != transform && !col.isTrigger) 
+                if(col.transform != transform && !col.isTrigger && !col.GetComponentInParent            <Rigidbody>()) 
                 {
                     ground = col.transform;
                     return true;
@@ -51,11 +52,12 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    
+
     public Vector3 velocity, jumpDirection, expectedChange, startLocalPosition;
-    // Update is called once per frame
-    //TODO Parent in spite of moving character controller
     void Update()
     {   
+        if(GameManager.instance.resetting) return;
         startLocalPosition = transform.localPosition;
         var eu = transform.eulerAngles;
         eu.x = 0;
@@ -98,11 +100,13 @@ public class PlayerMovement : MonoBehaviour
         if(isGrounded && velocity.y < 0)
         {
             velocity.y = -2;
-            transform.parent = ground;
+            if(parentToGround)
+                transform.parent = ground;
         }
         if(!isGrounded){
             velocity.y += gravity * Time.deltaTime;
-            transform.parent = null;
+            if(parentToGround)
+                transform.parent = null;
         }
         if(moveable && controller.enabled)controller.Move((velocity + jumpDirection) * Time.deltaTime);
 

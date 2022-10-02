@@ -2,20 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-public class DoorController : Interactable
+public class DoorController : ConditionalInteractable
 {
-
+    public Transform overrideHinge;
+    public Vector3 openPos;
     public bool open;
-    
 
+    public override void Start()
+    {
+        base.Start();
+        if(overrideHinge==null) overrideHinge = transform.GetChild(0);
+    }
 
     public void CloseDoor(){
-        transform.GetChild(0).DOLocalRotate(new Vector3(0, 0, 0), 0.25f);
+        overrideHinge.DOLocalRotate(new Vector3(0, 0, 0), 0.25f);
     }
 
     public void OpenDoor()
     {
-        transform.GetChild(0).DOLocalRotate(new Vector3(0, -90, 0), 0.25f);
+        overrideHinge.DOLocalRotate(openPos, 0.25f);
     }
 
     public override void OnInteract()
@@ -29,5 +34,6 @@ public class DoorController : Interactable
             OpenDoor();
         }
         open = !open;
+        base.OnInteract();
     }
 }

@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6dee9a0eacedf04abeb6e1df6d7e874, type: 3}
+  m_Name: Tutorial
+  m_EditorClassIdentifier: 
+  textToRead:
+  - C'mon what's taking so long?
+  - Oh no, are you some kind of moron?
+  - How have you functioned for so long
+  - without knowing how to do anything??
+  - Okay I'll help you just give me a sec I need to find a book...
+  - '                                                 '
+  - Ah hah here it is! "Existing For Morons"
+  - '"Are you a complete idiot?" Hey kid this sounds like it''s meant for you!'
+  - Let me skip around a little... oh okay here.
+  - '"Want to observe the natural world? Use your mouse to look around."'
+  - '"Want to walk around too? Use the arrow keys or WASD"'
+  - What the hell does that mean, why do I even have this?
+  - Let me find the chapter on using your hands... ah here it is.
+  - '"Your hands can help you interact with the world around you!"'
+  - '"By clicking the left mouse button on an object, you can interact'
+  - or even pick some things up! To make sure you're safe, you should
+  - only pick up one thing at a time!"
+  - Okay kid, you got that, just come and pick this pot up and
+  - we'll work it out from there.
+  next: {fileID: 0}

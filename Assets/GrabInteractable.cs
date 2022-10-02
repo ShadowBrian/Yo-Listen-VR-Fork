@@ -1,25 +1,44 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody))]
-public class GrabInteractable : Interactable
+public class GrabInteractable : ResetInteractable
 {
-    bool grabbed = false;
+    public bool grabbed {get; private set;}
 
+    public UnityEvent mOnGrabInteract;
     public override void OnInteract()
     {
-        PlayerController.instance.GrabObject(this);
-        grabbed = true;
+        if(!grabbed)
+        {
+            PlayerController.instance.GrabObject(this);
+            grabbed = true;
+        }
+        base.OnInteract();
     }
 
-    private void Update() {
+    public virtual void Release()
+    {
+        grabbed = false;
+        PlayerController.instance.ReleaseObject(this);
+    }
+    public virtual void OnGrabInteract()
+    {
+        mOnGrabInteract.Invoke();
+    }
+
+    public virtual void Update() {
         if(grabbed)
         {
             if(Input.GetMouseButtonDown(1))
             {
-                grabbed = false;
-                PlayerController.instance.ReleaseObject(this);
+                Release();
+            }
+            if(Input.GetMouseButtonDown(0))
+            {
+                OnGrabInteract();
             }
         }
     }
