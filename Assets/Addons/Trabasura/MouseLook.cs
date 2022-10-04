@@ -8,7 +8,7 @@ public class MouseLook : MonoBehaviour
 
     float xRotation = 0f;
 
-    
+
     public float mouseSensitivity = 100f;
 
     // Start is called before the first frame update
@@ -30,15 +30,16 @@ public class MouseLook : MonoBehaviour
 
     float lastTimeScale = 1;
 
-    private void FixedUpdate() {
-        lastTimeScale = Mathf.Lerp(lastTimeScale, Time.timeScale, Time.fixedDeltaTime/Time.timeScale);    
+    private void FixedUpdate()
+    {
+        lastTimeScale = Mathf.Lerp(lastTimeScale, Time.timeScale, Time.fixedDeltaTime / Time.timeScale);
     }
     // Update is called once per frame
     void Update()
     {
-        if(GameManager.instance.resetting) return;
+        if (GameManager.instance.resetting) return;
         //if(GameManager.uiOpened) return;
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime/lastTimeScale;
+        /*float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime/lastTimeScale;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime/lastTimeScale;
 
 
@@ -46,6 +47,20 @@ public class MouseLook : MonoBehaviour
         xRotation = Mathf.Clamp(xRotation, -90 , 90);
         transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
         
-        playerBody.Rotate(Vector3.up * mouseX);
+        playerBody.Rotate(Vector3.up * mouseX);*/
+        var mouseX = 0f;
+
+        if (UnityXRInputBridge.instance.GetButtonDown(XRButtonMasks.primary2DAxisLeft, XRHandSide.RightHand))
+        {
+            mouseX = -45f;
+            playerBody.RotateAround(CanvasFollower.instance.playerhead.position, Vector3.up, mouseX);
+        }
+
+        if (UnityXRInputBridge.instance.GetButtonDown(XRButtonMasks.primary2DAxisRight, XRHandSide.RightHand))
+        {
+            mouseX = 45f;
+            playerBody.RotateAround(CanvasFollower.instance.playerhead.position, Vector3.up, mouseX);
+        }
+        
     }
 }
