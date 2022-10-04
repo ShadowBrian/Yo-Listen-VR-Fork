@@ -72,13 +72,18 @@ public class GameManager : MonoBehaviour
         // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.R)) Restart();
-        if(Input.GetKeyDown(KeyCode.F)) Screen.fullScreen = !Screen.fullScreen;
-        if(Input.GetKeyDown(KeyCode.Escape)) Application.Quit();
+        //if(Input.GetKeyDown(KeyCode.R)) Restart();
+        //if(Input.GetKeyDown(KeyCode.F)) Screen.fullScreen = !Screen.fullScreen;
+        //if(Input.GetKeyDown(KeyCode.Escape)) Application.Quit();
         if(!startGame || won || resetting) return;
         if(resetTimer == null)
         {
-            if(Input.GetMouseButtonDown(0)||Input.GetMouseButtonDown(1)||Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0  || Input.GetButton("Jump"))
+           // if(Input.GetMouseButtonDown(0)||Input.GetMouseButtonDown(1)||Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0  || Input.GetButton("Jump"))
+            //{
+            //    resetTimer = new Timer(10);
+            //}
+
+            if (UnityXRInputBridge.instance.GetVel(XRHandSide.LeftHand).magnitude > 0 || UnityXRInputBridge.instance.GetVel(XRHandSide.RightHand).magnitude > 0)
             {
                 resetTimer = new Timer(10);
             }
