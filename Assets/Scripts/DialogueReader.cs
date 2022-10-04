@@ -49,7 +49,7 @@ public class DialogueReader : MonoBehaviour
         int index = sounds.IndexOf(letter);
         float location = index * 0.25f;
         StopCoroutine("PlaySound");
-        Debug.Log(location);
+        //Debug.Log(location);
         StartCoroutine(PlaySound(location, 0.2f));
     }
 
@@ -76,12 +76,12 @@ public class DialogueReader : MonoBehaviour
             var tInfo = textDisplay.textInfo;
             for(int i = 0; i < tInfo.characterCount; i++)
             {
-                Debug.Log(currentRead.Substring(i,1));
+                //Debug.Log(currentRead.Substring(i,1));
                 yield return new WaitForSeconds(speed);
                 textDisplay.maxVisibleCharacters = i+1;
                 string checkText = "" + tInfo.characterInfo[i].character;
                 checkText = checkText.ToLower();
-                Debug.Log(checkText);
+                //Debug.Log(checkText);
                 if(sounds.Contains(checkText))
                 {
                     if(i+1<tInfo.characterCount)
