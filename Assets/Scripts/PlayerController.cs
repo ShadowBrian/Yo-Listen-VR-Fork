@@ -153,9 +153,9 @@ public class PlayerController : MonoBehaviour
     {
         RaycastHit hit;
 
-        if(Physics.Raycast(transform.GetChild(0).transform.position, transform.GetChild(0).transform.forward, out hit))
+        if(Physics.Raycast(transform.GetChild(0).Find("LHand").transform.position, transform.GetChild(0).Find("LHand").transform.forward - transform.GetChild(0).Find("LHand").transform.up, out hit))
         {
-            if(Vector3.Distance(hit.point, transform.GetChild(0).transform.position) < range)
+            if(Vector3.Distance(hit.point, transform.GetChild(0).Find("LHand").transform.position) < range)
             {
                 return hit.transform.gameObject;
             }
