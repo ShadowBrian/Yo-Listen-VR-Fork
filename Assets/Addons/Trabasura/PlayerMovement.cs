@@ -48,7 +48,8 @@ public class PlayerMovement : MonoBehaviour
     {
         get{
             // if(GameManager.uiOpened) return Vector3.zero;
-            return new Vector3(Input.GetAxis("Horizontal"), 0 ,Input.GetAxis("Vertical"));
+            //return new Vector3(Input.GetAxis("Horizontal"), 0 ,Input.GetAxis("Vertical"));
+            return new Vector3(UnityXRInputBridge.instance.GetVec2(XR2DAxisMasks.primary2DAxis,XRHandSide.LeftHand).x, 0, UnityXRInputBridge.instance.GetVec2(XR2DAxisMasks.primary2DAxis, XRHandSide.LeftHand).y);
         }
     }
 
@@ -56,8 +57,9 @@ public class PlayerMovement : MonoBehaviour
 
     public Vector3 velocity, jumpDirection, expectedChange, startLocalPosition;
     void Update()
-    {   
-        if(GameManager.instance.resetting) return;
+    {
+        bool JumpButton = UnityXRInputBridge.instance.GetButton(XRButtonMasks.primaryButton, XRHandSide.RightHand);
+        if (GameManager.instance.resetting) return;
         startLocalPosition = transform.localPosition;
         var eu = transform.eulerAngles;
         eu.x = 0;
@@ -66,7 +68,10 @@ public class PlayerMovement : MonoBehaviour
         if(moveable)
             mouseInput = Vector3.ClampMagnitude(movementInput, 1);
 
-        var inputVelocity = transform.TransformDirection(mouseInput) * Time.deltaTime * speed;
+        var flathead = CanvasFollower.instance.playerhead.forward;
+        flathead.y = 0;
+
+        var inputVelocity = Quaternion.LookRotation(flathead) * mouseInput * Time.deltaTime * speed;
         if(!isGrounded && groundedLastFrame)
         {
             jumpDirection = inputVelocity/Time.deltaTime;
@@ -83,7 +88,7 @@ public class PlayerMovement : MonoBehaviour
                 GetComponent<AudioSource>().Play();
             }
             if(moveable && controller.enabled)controller.Move(inputVelocity);
-            if(!Input.GetButton("Jump"))
+            if(!JumpButton)
             {
                 jumpDirection = Vector3.Lerp(jumpDirection, Vector3.zero, 1);
             }
@@ -110,7 +115,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if(moveable && controller.enabled)controller.Move((velocity + jumpDirection) * Time.deltaTime);
 
-        if(Input.GetButton("Jump") && isGrounded && moveable && canJump)// && !GameManager.uiOpened)
+        if(JumpButton && isGrounded && moveable && canJump)// && !GameManager.uiOpened)//Input.GetButton("Jump")
         {
             if(velocity.y <= 0)
             {
@@ -118,7 +123,7 @@ public class PlayerMovement : MonoBehaviour
 
                 GetComponent<AudioSource>().Play();
             }
-            Debug.Log(isGrounded);
+            //Debug.Log(isGrounded);
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
             
         }
