@@ -32,13 +32,15 @@ public class GrabInteractable : ResetInteractable
     public virtual void Update() {
         if(grabbed)
         {
-            if(Input.GetMouseButtonDown(1))
+            if(UnityXRInputBridge.instance.GetButtonUp(XRButtonMasks.gripButton, XRHandSide.LeftHand))
             {
                 Release();
+                UnityXRInputBridge.instance.SetHaptics(0.5f, XRHandSide.LeftHand);
             }
-            if(Input.GetMouseButtonDown(0))
+            if(UnityXRInputBridge.instance.GetButtonDown(XRButtonMasks.gripButton, XRHandSide.LeftHand))
             {
                 OnGrabInteract();
+                UnityXRInputBridge.instance.SetHaptics(1f, XRHandSide.LeftHand);
             }
         }
     }

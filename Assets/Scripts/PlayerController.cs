@@ -85,13 +85,14 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-        if(interactable && interactable.CheckIfInteractable() && Input.GetMouseButtonDown(0))
+        if(interactable && interactable.CheckIfInteractable() && UnityXRInputBridge.instance.GetButtonDown(XRButtonMasks.gripButton, XRHandSide.LeftHand))
         {
             Debug.Log("Click");
             interactAudio.Play();
             interactable.OnInteract();
         }
-        else if(interactable && Input.GetMouseButtonDown(0)){
+        else if(interactable && UnityXRInputBridge.instance.GetButtonDown(XRButtonMasks.gripButton, XRHandSide.LeftHand))
+        {
             failInteractAudio.Play();
         }
 
